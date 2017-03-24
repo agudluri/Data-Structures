@@ -230,12 +230,5 @@ public class LinkedListImpl<E> implements CollectionInterface<E>, Iterable<E> {
 		public boolean hasNext() {
 			return current != null;
 		}
-
-		public void remove() {
-			/**
-			 * Leave it blank for now.
-			 */
-			return;
-		}
 	}
 }
