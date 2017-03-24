@@ -51,12 +51,12 @@ public class ArrayImpl<E> implements CollectionInterface<E> {
 		 */
 		if (i < num_elements) {
 			E obj = elements[i];
-			elements[i] = null;										//Making the space empty
+			elements[i] = null;						//Making the space empty
 				for (int lol = i; lol < num_elements; lol++) {		//Swapping the elements towards the left
-					elements[lol] = elements[lol + 1];				//
-					elements[lol + 1] = null;						//Or you could say moving the null pointer towards the right!
+					elements[lol] = elements[lol + 1];		//
+					elements[lol + 1] = null;			//Or you could say moving the null pointer towards the right!
 				}
-			num_elements--;											//reducing the number of elements. Obviously!
+			num_elements--;							//reducing the number of elements. Obviously!
 			return obj;
 		} else {
 			throw new ArrayIndexOutOfBoundsException();
@@ -69,8 +69,8 @@ public class ArrayImpl<E> implements CollectionInterface<E> {
 	public boolean contains(E e) {
 		boolean lol = false;
 		for (E count : elements) {			//	
-			if (count == e)					//Going through the entire array and checking if the element exists
-				lol = true;					//
+			if (count == e)				//Going through the entire array and checking if the element exists
+				lol = true;			//
 		}
 		return lol;
 	}
@@ -87,7 +87,7 @@ public class ArrayImpl<E> implements CollectionInterface<E> {
 		if (where == Where.MIDDLE && index <= num_elements - 1)
 			System.out.println("Inserting element at index " + num_elements);
 		System.arraycopy(elements, index, elements, index + 1, num_elements - index); //using the arraycopy function to copy elements
-		elements[index] = e;															//from the array to the same array
+		elements[index] = e;								//from the array to the same array
 		num_elements++;
 		// add(Where.MIDDLE, index, e);
 		return true;
@@ -133,10 +133,10 @@ public class ArrayImpl<E> implements CollectionInterface<E> {
 	 */
 	 public ArrayImpl<E> subList(int from, int to)
 	 {
-		 if(from<0)											//
-			 throw new IndexOutOfBoundsException();			//		Making sure the indices are not weird.
-		 if (to > num_elements)								//
-			 throw new IndexOutOfBoundsException();			//
+		 if(from<0)											
+			 throw new IndexOutOfBoundsException();			
+		 if (to > num_elements)								
+			 throw new IndexOutOfBoundsException();			
 		 ArrayImpl<E> lol =  new ArrayImpl<E>();
 		 for(int i=from;i<to;i++){
 			 lol.add(elements[i]); 			//Adding elements to the new object of ArrayImpl
@@ -154,7 +154,7 @@ public class ArrayImpl<E> implements CollectionInterface<E> {
 	@SuppressWarnings("unchecked")
 	private boolean grow() {
 		int newSize = elements.length * 2;
-		elements = Arrays.copyOf(elements, newSize);		//using arrays.copyof to make a copy the existing array with double the size
+		elements = Arrays.copyOf(elements, newSize);	//using arrays.copyof to make a copy the existing array with double the size
 		System.out.println("Capacity reached.  Increasing storage...");
 		System.out.println("New capacity is " + 2*capacity + " elements");
 		return true;
