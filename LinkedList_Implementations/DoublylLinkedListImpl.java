@@ -298,13 +298,6 @@ public class DoublyLinkedListImpl<E> implements CollectionInterface<E>, Iterable
 			return current!= null;
 		}
 
-		public void remove() {
-			/**
-			 * Leave it blank for now.
-			 */
-			return;
-		}
-
 		@Override
 		public void add(E e) {
 			// TODO Auto-generated method stub
