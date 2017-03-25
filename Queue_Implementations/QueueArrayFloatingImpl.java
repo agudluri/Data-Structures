@@ -1,4 +1,4 @@
-\import java.util.Arrays;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class QueueArrayFloatingImpl<E> implements QueueInterface<E> {
