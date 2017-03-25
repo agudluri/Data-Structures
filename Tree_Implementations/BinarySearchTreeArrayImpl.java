@@ -276,52 +276,7 @@ public class BinarySearchTreeArrayImpl<E> {
                 tree[tree[p.parent].right] = null;        
         } // p has a parent but no children
         return p;
-        
-        
-		/*size--;
-
-		// If node has two children, replace node's element with node's
-		// successor's
-		// element, then make node reference that successor.
-		if (node.left != -1 && node.right != -1) {
-			TreeNode<E> s = successor(node);
-			node.element = s.element;
-			node = s;
-		} // node had two children
-
-		// At this point, node has either no children or one child.
-		TreeNode<E> replacement;
-
-		if (node.left != -1) {
-			replacement = tree[node.left];
-		} else {
-			replacement = tree[node.right];
-		}
-
-		// If node has at least one child, link replacement to node.parent.
-		if (replacement != null) {
-			replacement.parent = node.parent;
-			if (node.parent == -1)
-				tree[root] = replacement;
-			else if (node == tree[tree[node.parent].left])
-				tree[tree[node.parent].left] = replacement;
-			else
-				tree[tree[node.parent].right] = replacement;
-		} // node has at least one child
-
-		else if (node.parent == -1) {
-			tree[root] = null;
-			root = -1;
-		}
-
-		else {
-			if (node == tree[tree[node.parent].left])
-				tree[tree[node.parent].left] = null;
-			else
-				tree[tree[node.parent].right] = null;
-		} // node has a parent but no children
-
-		return node;*/
+		
 	}
 
 	/**
