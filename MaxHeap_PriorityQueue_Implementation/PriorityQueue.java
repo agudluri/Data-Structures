@@ -93,19 +93,19 @@ public class PriorityQueue<E> {
 	 *
 	 */
 	public E remove() {
-      if (size == 0)
-         throw new NoSuchElementException();
+      		if (size == 0)
+        	 throw new NoSuchElementException();
 
-      int s = --size;
+   	   	int s = --size;
       
-      E elem = (E) queue[0];
-      E last = (E) queue[s];
+      		E elem = (E) queue[0];
+      		E last = (E) queue[s];
      
-      queue[s] = null;
-      if (s != 0) siftDown(0, last);
+    	  	queue[s] = null;
+      		if (s != 0) siftDown(0, last);
 
-      return elem;
-   }
+	      	return elem;
+   	}
    
    	/**
     	* A method to print the heap in detail.
@@ -171,21 +171,19 @@ public class PriorityQueue<E> {
 	 * @param k, the index of the last element
 	 * @param x, the element that is to be removed
 	 */
-	 private void siftDown(int k, E x) 
-   {
-        Comparable<? super E> key = (Comparable<? super E>)x;
-        int half = size >>> 1;        // loop while a non-leaf
-        while (k < half) {
-            int child = (k << 1) + 1; // assume left child is least
-            Object c = queue[child];
-            int right = child + 1;
-            if (right < size &&
-                ((Comparable<? super E>) c).compareTo((E) queue[right]) > 0)
-                c = queue[child = right];
-            if (key.compareTo((E) c) <= 0)
-                break;
-            queue[k] = c;
-            k = child;
+	 private void siftDown(int k, E x) {
+        	Comparable<? super E> key = (Comparable<? super E>)x;
+        	int half = size >>> 1;        // loop while a non-leaf
+        	while (k < half) {
+            		int child = (k << 1) + 1; // assume left child is least
+            		Object c = queue[child];
+           		int right = child + 1;
+            		if (right < size &&((Comparable<? super E>) c).compareTo((E) queue[right]) > 0)
+               			c = queue[child = right];
+            		if (key.compareTo((E) c) <= 0)
+                		break;
+            	queue[k] = c;
+            	k = child;
         }
         queue[k] = key;
    }
