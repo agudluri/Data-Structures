@@ -19,22 +19,21 @@ public class PriorityQueue<E> {
 	private int size = 0;
 
 	/**
-    * Creates a PriorityQueue with the default initial
-    * capacity (11) that orders its elements according to their
-    * Comparable natural ordering.
-    */
+   	 * Creates a PriorityQueue with the default initial
+    	* capacity (11) that orders its elements according to their
+    	* Comparable natural ordering.
+    	*/
 	public PriorityQueue() {
 		this(DEFAULT_INITIAL_CAPACITY);
 	}
 
 	/**
-    * Creates a PriorityQueue with the specified initial
-    * capacity that orders its elements according to their Comparable natural ordering.
-    *
-    * @param initialCapacity the initial capacity for this priority queue
-    * @throws IllegalArgumentException if initialCapacity is less
-    *         than 1
-    */
+   	 * Creates a PriorityQueue with the specified initial
+   	 * capacity that orders its elements according to their Comparable natural ordering.
+   	 *
+    	 * @param initialCapacity the initial capacity for this priority queue
+    	 * @throws IllegalArgumentException if initialCapacity is less than 1
+    	 */
 	public PriorityQueue(int initialCapacity) {
 		if (initialCapacity < 1)
 			throw new IllegalArgumentException();
@@ -108,8 +107,8 @@ public class PriorityQueue<E> {
       return elem;
    }
    
-   /**
-    * A method to print the heap in detail.
+   	/**
+    	* A method to print the heap in detail.
 	*
 	*/
 	public void print_heap() {
