@@ -180,7 +180,7 @@ public class PriorityQueue<E> {
            		int right = child + 1;
             		if (right < size &&((Comparable<? super E>) c).compareTo((E) queue[right]) > 0)
                			c = queue[child = right];
-            		if (key.compareTo((E) c) <= 0)
+            		if (key.compareTo((E) c) >= 0)
                 		break;
             	queue[k] = c;
             	k = child;
