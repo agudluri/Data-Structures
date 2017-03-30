@@ -184,8 +184,8 @@ public class PriorityQueue<E> {
                 		break;
             	queue[k] = c;
             	k = child;
-        }
-        queue[k] = key;
-   }
+        	}
+        	queue[k] = key;
+   	}
 
 }
