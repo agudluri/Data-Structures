@@ -1,50 +1,42 @@
 import java.util.*;
 
 public class PriorityQueue<E> {
-	private static final int DEFAULT_INITIAL_CAPACITY = 11;
-
-	/**
-	 * Priority queue represented as a balanced binary heap: the two children of
-	 * queue[n] are queue[2*n+1] and queue[2*(n+1)]. The priority queue is
-	 * ordered by comparator, or by the elements' natural ordering, if
-	 * comparator is null: For each node n in the heap and each descendant d of
-	 * n, n <= d. The element with the lowest value is in queue[0], assuming the
-	 * queue is nonempty.
-	 */
+	
 	private transient Object[] queue;
-
-	/**
-	 * The number of elements in the priority queue.
-	 */
 	private int size = 0;
+	private Comparator<? super E> comparator = null;
 
 	/**
-   	 * Creates a PriorityQueue with the default initial
-    	* capacity (11) that orders its elements according to their
-    	* Comparable natural ordering.
-    	*/
-	public PriorityQueue() {
-		this(DEFAULT_INITIAL_CAPACITY);
+	 * Creates a PQ with the default initial capacity (11) that orders its
+	 * elements according to their natural ordering (Using Comparable).
+	 */
+	public CS401PQ() {
+		this(11, null);
 	}
 
 	/**
-   	 * Creates a PriorityQueue with the specified initial
-   	 * capacity that orders its elements according to their Comparable natural ordering.
-   	 *
-    	 * @param initialCapacity the initial capacity for this priority queue
-    	 * @throws IllegalArgumentException if initialCapacity is less than 1
-    	 */
-	public PriorityQueue(int initialCapacity) {
+	 * Initializes a PriorityQueue object with the specified initial capacity
+	 * that orders its elements according to the specified comparator.
+	 *
+	 * @param initialCapacity
+	 *            the initial capacity for this priority queue.
+	 * @param comparator
+	 *            the comparator used to order this priority queue. If null then
+	 *            the order depends on the elements’ natural ordering.
+	 * @throws IllegalArgumentException
+	 *             if initialCapacity is less than 1
+	 */
+	public CS401PQ(int initialCapacity, Comparator<? super E> comparator) {
 		if (initialCapacity < 1)
 			throw new IllegalArgumentException();
-		this.queue = new Object[initialCapacity];
-	}
+		queue = new Object[initialCapacity];
+		this.comparator = comparator;
+	} // constructor
 
 	/**
 	 * Inserts the specified element into this priority queue.
 	 *
-	 * @param e, the element to be added.
-	 * @return a boolean denoting the success of the addition.
+	 * @return a boolean representing the success of addition
 	 * @throws ClassCastException
 	 *             if the specified element cannot be compared with elements
 	 *             currently in this priority queue according to the priority
@@ -53,21 +45,6 @@ public class PriorityQueue<E> {
 	 *             if the specified element is null
 	 */
 	public boolean add(E e) {
-		return offer(e);
-	}
-
-	/**
-	 * Additional method that aids in inserting the element into this priority queue.
-	 *
-	 * @return a boolean denoting the success of the underlying sift method.
-	 * @throws ClassCastException
-	 *             if the specified element cannot be compared with elements
-	 *             currently in this priority queue according to the priority
-	 *             queue's ordering
-	 * @throws NullPointerException
-	 *             if the specified element is null
-	 */
-	public boolean offer(E e) {
 		if (e == null)
 			throw new NullPointerException();
 		int i = size;
@@ -80,46 +57,40 @@ public class PriorityQueue<E> {
 			siftUp(i, e);
 		return true;
 	}
-	
+
 	/**
-	 * Method to remove an element from the priority queue.
+	 * Removes the smallest-valued element from this PriorityQueue object. The
+	 * worstTime(n) is O(log n).
 	 *
-	 * @throws ClassCastException
-	 *             if the specified element cannot be compared with elements
-	 *             currently in this priority queue according to the priority
-	 *             queue's ordering
+	 * @return the element removed.
+	 *
 	 * @throws NoSuchElementException
-	 *             if the specified element cannot be found in the queue.
+	 *             – if this PriorityQueue object is empty.
 	 *
 	 */
 	public E remove() {
-      		if (size == 0)
-        	 throw new NoSuchElementException();
+		if (size == 0)
+			throw new NoSuchElementException();
 
-   	   	int s = --size;
-      
-      		E elem = (E) queue[0];
-      		E last = (E) queue[s];
-     
-    	  	queue[s] = null;
-      		if (s != 0) siftDown(0, last);
+		int s = --size;
 
-	      	return elem;
-   	}
-   
-   	/**
-    	* A method to print the heap in detail.
-	*
-	*/
-	public void print_heap() {
-		System.out.println("The Max Heap is: ");
-		int numleaves = Math.floorDiv(size + 1, 2);
-		for (int i = 0; i < size - numleaves; i++) {
-			System.out.println(
-					"Parent: " + queue[i] + ", Left Child: " + queue[2 * i + 1] + ", Right Child: " + queue[2 * i + 2]);
-		}
-		System.out.println("The max value is " + queue[0]);
-		System.out.println();
+		E elem = (E) queue[0];
+		E last = (E) queue[s];
+
+		queue[s] = null;
+		if (s != 0)
+			siftDown(0, last);
+
+		return elem;
+	}
+
+	public String toString() {
+		String s = "";
+
+		for (int i = 0; i < size; i++)
+			s += queue[i] + " ";
+
+		return s;
 	}
 
 	/* --- Private methods --- */
@@ -142,14 +113,17 @@ public class PriorityQueue<E> {
 			newCapacity = minCapacity;
 		queue = Arrays.copyOf(queue, newCapacity);
 	}
-	
-	
+
 	/**
-	 * A method to, virtually speaking, swap elements if the properties of a max heap dont satisfy
-	 * Used while adding elements.
-	 *
-	 * @param k, the index of the last element
-	 * @param x, the element that is to be added 
+	 * Inserts item x at position k, maintaining heap invariant by promoting x
+	 * up the tree until it is greater than or equal to its parent, or is the
+	 * root. (according to the elements’ implementation of the Comparable
+	 * interface)
+	 * 
+	 * @param k
+	 *            the position to fill
+	 * @param x
+	 *            the item to insert
 	 */
 	private void siftUp(int k, E x) {
 		Comparable<? super E> key = (Comparable<? super E>) x;
@@ -163,29 +137,33 @@ public class PriorityQueue<E> {
 		}
 		queue[k] = key;
 	}
-	
-	/**
-	 * A method similar in functionality to the siftUp method above.
-	 * Used while removing elements.
-	 *
-	 * @param k, the index of the last element
-	 * @param x, the element that is to be removed
-	 */
-	 private void siftDown(int k, E x) {
-        	Comparable<? super E> key = (Comparable<? super E>)x;
-        	int half = size >>> 1;        // loop while a non-leaf
-        	while (k < half) {
-            		int child = (k << 1) + 1; // assume left child is least
-            		Object c = queue[child];
-           		int right = child + 1;
-            		if (right < size &&((Comparable<? super E>) c).compareTo((E) queue[right]) > 0)
-               			c = queue[child = right];
-            		if (key.compareTo((E) c) >= 0)
-                		break;
-            	queue[k] = c;
-            	k = child;
-        	}
-        	queue[k] = key;
-   	}
 
+	/**
+	 * Maintains the heap properties in this PriorityQueue object while,
+	 * starting at a specified index, inserts a specified element where it
+	 * belongs. The worstTime(n) is O(log n).
+	 *
+	 * @param k
+	 *            –the specified position where the restoration of the heap will
+	 *            begin.
+	 * @param x
+	 *            –the specified element to be inserted.
+	 *
+	 */
+	private void siftDown(int k, E x) {
+		Comparable<? super E> key = (Comparable<? super E>) x;
+		int half = size >>> 1; // loop while a non-leaf
+		while (k < half) {
+			int child = (k << 1) + 1; // assume left child is least
+			Object c = queue[child];
+			int right = child + 1;
+			if (right < size && ((Comparable<? super E>) c).compareTo((E) queue[right]) > 0)
+				c = queue[child = right];
+			if (key.compareTo((E) c) >= 0)
+				break;
+			queue[k] = c;
+			k = child;
+		}
+		queue[k] = key;
+	}
 }
