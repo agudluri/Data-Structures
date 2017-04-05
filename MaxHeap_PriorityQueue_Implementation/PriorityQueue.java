@@ -62,7 +62,7 @@ public class PQ<E> {
 	}
 
 	/**
-	 * Removes the smallest-valued element from this PriorityQueue object. The
+	 * Removes the highest valued element from this PriorityQueue object. The
 	 * worstTime(n) is O(log n).
 	 *
 	 * @return the element removed.
