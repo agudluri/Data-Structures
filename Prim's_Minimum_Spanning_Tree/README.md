@@ -6,4 +6,4 @@
 
 - A sample input, 'input.txt' has been provided with the edge information of the graph in the form of a matrix. You may edit the weights as you please. Zeroes indicate the lack of an edge between the vertices. 
 
-- Please enter numbers (0 for A, 1 for B and so on) as an input argument while running the program.
+- Please enter numbers (0 for A, 1 for B and so on) as input arguments while running the program.
